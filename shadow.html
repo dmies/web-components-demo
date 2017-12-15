@@ -12,6 +12,7 @@
   <div id="webcomponents">
     <!-- list items should get here -->
   </div>
+  <p>normal paragraph</p>
   <script type="text/javascript">
     if (document.head.createShadowRoot || document.head.attachShadow) {
       const shadow = document.querySelector('#webcomponents').attachShadow({
@@ -22,6 +23,13 @@
       shadow.innerHTML += '<p>HTML Import</p>';
       shadow.innerHTML += '<p>Shadow DOM</p>';
       shadow.innerHTML += '<p>Custom Elements</p>';
+      shadow.innerHTML += `
+        <style>
+          p{
+            color: red;
+          }
+        </style>
+      `;
     } else {
       document.body.appendChild(document.createTextNode('Shadow DOM is not supported'));
     }
