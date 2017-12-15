@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Web Components: template example</title>
+</head>
+
+<body>
+  <ul id="webcomponents">
+    <!-- list items should get here -->
+  </ul>
+
+  <template id="feature">
+    <li></li>
+  </template>
+
+  <script type="text/javascript">
+    // Test to see if the browser supports the HTML template element by checking
+    // for the presence of the template element's content attribute.
+    if ('content' in document.createElement('template')) {
+      const features = [
+        "HTML Template",
+        "HTML Import",
+        "Shadow DOM",
+        "Custom Elements",
+      ];
+
+      // Instantiate the table with the existing HTML tbody
+      // and the row with the template
+      const template = document.querySelector('#feature');
+      let feature = template.content.querySelectorAll("li");
+      let list = document.getElementById("webcomponents");
+
+      features.forEach(f => {
+        feature[0].textContent = f;
+        // Clone the new item and insert it into the list
+        const clone = document.importNode(template.content, true);
+        list.appendChild(clone);
+      });
+    } else {
+      // Find another way to add the rows to the table because 
+      // the HTML template element is not supported.
+      document.body.appendChild(document.createTextNode('HTML templates are not supported'));
+    }
+  </script>
+</body>
+
+</html>

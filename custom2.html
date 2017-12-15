@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Web Components: Custom Elements</title>
+</head>
+
+<body>
+  <web-components>
+    <web-feature text="HTML Templates"></web-feature>
+    <web-feature text="HTML Imports"></web-feature>
+    <web-feature text="Shadow DOM"></web-feature>
+    <web-feature text="Custom Elements"></web-feature>
+  </web-components>
+
+  <script type="text/javascript">
+    if ('customElements' in window) {
+      class WebFeature extends HTMLElement {
+        constructor() {
+          super();
+          const li = document.createElement('li');
+          const text = this.getAttribute('text');
+          li.textContent = text;
+          li.addEventListener('click', () => console.log(text))
+          this.appendChild(li);
+        }
+      }
+
+      class WebComponents extends HTMLElement {
+        constructor() {
+          super();
+          const ul = document.createElement('ul');
+          ul.innerHTML = this.innerHTML;
+          this.innerHTML = null;
+          this.appendChild(ul);
+        }
+      }
+
+      window.customElements.define('web-components', WebComponents);
+      window.customElements.define('web-feature', WebFeature);
+    } else {
+      document.body.appendChild(document.createTextNode('Custom Elements are not supported'));
+    }
+  </script>
+</body>
+
+</html>

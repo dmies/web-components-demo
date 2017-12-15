@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Web Components: Templates, Custom and Shadow</title>
+</head>
+
+<body>
+  <web-components></web-components>
+  <script type="text/javascript">
+    let tmpl = document.createElement('template');
+    tmpl.innerHTML =
+      `
+      <ul id="webcomponents">  
+        <li>HTML Template</li>
+        <li>HTML Import</li>
+        <li>Shadow DOM</li>
+        <li>Custom Elements</li>
+      </ul>`;
+
+    class WebComponents extends HTMLElement {
+      constructor() {
+        super(); // always call super() first in the ctor.
+        let shadowRoot = this.attachShadow({
+          mode: 'open'
+        });
+        shadowRoot.appendChild(tmpl.content.cloneNode(true));
+      }
+
+    }
+    window.customElements.define('web-components', WebComponents);
+  </script>
+</body>
+
+</html>

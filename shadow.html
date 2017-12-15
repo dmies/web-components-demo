@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Web Components: Shadow DOM</title>
+</head>
+
+<body>
+  <div id="webcomponents">
+    <!-- list items should get here -->
+  </div>
+  <script type="text/javascript">
+    if (document.head.createShadowRoot || document.head.attachShadow) {
+      const shadow = document.querySelector('#webcomponents').attachShadow({
+        mode: 'open'
+      });
+
+      shadow.innerHTML = '<p>HTML Template</p>';
+      shadow.innerHTML += '<p>HTML Import</p>';
+      shadow.innerHTML += '<p>Shadow DOM</p>';
+      shadow.innerHTML += '<p>Custom Elements</p>';
+    } else {
+      document.body.appendChild(document.createTextNode('Shadow DOM is not supported'));
+    }
+  </script>
+</body>
+
+</html>
